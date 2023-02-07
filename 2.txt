@@ -1,0 +1,74 @@
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Call();
+    }
+    public void Call()
+    {
+        Button btn = findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText e = findViewById(R.id.call);
+                String show = e.getText().toString();
+                Toast.makeText(MainActivity.this, "You typed "+show,
+                        Toast.LENGTH_SHORT).show();
+                Uri u = Uri.parse("tel:"+show);
+                Intent i = new Intent(Intent.ACTION_DIAL,u);
+                    startActivity(i);
+                                    }
+
+        });
+
+
+    }
+}
+
+MainActivity.java
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button b1 = findViewById(R.id.b1234);
+        b1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this,secondactivity.class);
+                EditText e = findViewById(R.id.e);
+                EditText e2 = findViewById(R.id.e2);
+                int n1 = Integer.parseInt(e.getText().toString());
+                int n2 = Integer.parseInt(e2.getText().toString());
+                int sum = n1+n2;
+                String s = Integer.toString(sum);
+                Bundle extras = new Bundle();
+                extras.putString("addition", s);
+                intent.putExtras(extras);
+                startActivity(intent);
+
+            }
+
+        });
+
+    }
+}
+
+MainActivity2.java
+
+public class secondactivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.secondactivity);
+        TextView t = findViewById(R.id.t);
+        String val = getIntent().getStringExtra("addition");
+        t.setText(val);
+
+    }
+}

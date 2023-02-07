@@ -1,0 +1,298 @@
+public class MainActivity extends AppCompatActivity {
+    boolean isNewOp= true;
+    String newNumber,oldNumber,op;
+    EditText ed1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ed1= findViewById(R.id.editText);
+    }
+
+    public void numberEvent(View view){
+        if(isNewOp)
+            ed1.setText("");
+        isNewOp = false;
+        String number = ed1.getText().toString();
+        switch (view.getId()){
+            case R.id.b1:
+                number +="1";
+                break;
+            case R.id.b2:
+                number +="2";
+                break;
+            case R.id.b3:
+                number +="3";
+                break;
+            case R.id.b4:
+                number +="4";
+                break;
+            case R.id.b5:
+                number +="5";
+                break;
+            case R.id.b6:
+                number +="6";
+                break;
+            case R.id.b7:
+                number +="7";
+                break;
+            case R.id.b8:
+                number +="8";
+                break;
+            case R.id.b9:
+                number +="9";
+                break;
+            case R.id.b0:
+                number +="0";
+                break;
+            case R.id.bdot:
+                number +=".";
+                break;
+            case R.id.bminus:
+                number = "-"+number;
+                break;
+        }
+        ed1.setText(number);
+    }
+
+    public void operatorEvent(View view){
+        isNewOp = true;
+        oldNumber=ed1.getText().toString();
+        switch (view.getId()){
+            case R.id.bdiv:op="/"; break;
+            case R.id.bmul:op="*"; break;
+            case R.id.bplus:op="+"; break;
+            case R.id.bminus:op="-"; break;
+        }
+    }
+
+    public void equalEvent(View view){
+        newNumber = ed1.getText().toString();
+        double result = 0.0;
+        switch (op){
+            case "+":
+                result= Double.parseDouble(oldNumber)+ Double.parseDouble(newNumber);
+                break;
+            case "-":
+                result= Double.parseDouble(oldNumber)- Double.parseDouble(newNumber);
+                break;
+            case "*":
+                result= Double.parseDouble(oldNumber)* Double.parseDouble(newNumber);
+                break;
+            case "/":
+                result= Double.parseDouble(oldNumber)/ Double.parseDouble(newNumber);
+                break;
+        }
+        ed1.setText(result+"");
+    }
+
+    public void acEvent(View view){
+        ed1.setText("0");
+        isNewOp= true;
+    }
+
+    public void percentEvent(View view){
+        double no= Double.parseDouble(ed1.getText().toString())/100;
+        ed1.setText(no+"");
+        isNewOp=true;
+    }
+}
+
+
+XML
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AC"
+                    android:onClick="ace"/>
+
+                <Button
+                    android:id="@+id/pm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="+/-"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/bdiv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:onClick="oe"/>
+
+                <Button
+                    android:id="@+id/bmul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="*"
+                    android:onClick="oe"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/b7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/b8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/b9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/bmod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="%" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/b4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/b5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/b6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/bplus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:onClick="oe"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/b1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/b2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/b3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/bmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:onClick="oe"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="189dp">
+
+                <Button
+                    android:id="@+id/b0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/bdot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="."
+                    android:onClick="ne"/>
+
+                <Button
+                    android:id="@+id/beq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="="
+                    android:onClick="ee"/>
+
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
